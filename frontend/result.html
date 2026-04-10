@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results | AI Resume Analyser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+        if (localStorage.theme === 'light') { document.documentElement.classList.remove('dark'); }
+        else { document.documentElement.classList.add('dark'); localStorage.theme = 'dark'; }
+    </script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="min-h-screen font-sans p-6 pb-20 bg-transparent relative transition-colors duration-300">
+    <div id="vanta-bg" class="fixed inset-0 z-[-1]"></div>
+
+    <!-- FLOATING SIDE ACTION MENU -->
+    <div class="fixed left-4 md:left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
+        <button id="themeToggle" class="side-action-btn group" aria-label="Toggle theme" title="Toggle Theme">
+            <!-- Moon -->
+            <svg id="moonIcon" class="w-6 h-6 hidden dark:block transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <!-- Sun -->
+            <svg id="sunIcon" class="w-6 h-6 block stroke-amber-500 dark:hidden transition-transform duration-300 group-hover:rotate-45 group-hover:stroke-white" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+        </button>
+        
+        <button id="supportBtn" class="side-action-btn group" aria-label="Support" title="Get Support">
+            <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+        </button>
+
+        <button id="feedbackBtn" class="side-action-btn group" aria-label="Feedback" title="Send Feedback">
+            <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- TECH THEME BORDER -->
+    <div class="absolute inset-3 md:inset-5 pointer-events-none z-[100] rounded-2xl border border-blue-500/20 dark:border-blue-400/30 overflow-hidden" id="techFrame">
+        <div class="absolute top-0 left-0 w-16 h-16 border-t-[3px] border-l-[3px] border-blue-500/80 rounded-tl-2xl"></div>
+        <div class="absolute top-0 right-0 w-16 h-16 border-t-[3px] border-r-[3px] border-purple-500/80 rounded-tr-2xl"></div>
+        <div class="absolute bottom-0 left-0 w-16 h-16 border-b-[3px] border-l-[3px] border-purple-500/80 rounded-bl-2xl"></div>
+        <div class="absolute bottom-0 right-0 w-16 h-16 border-b-[3px] border-r-[3px] border-blue-500/80 rounded-br-2xl"></div>
+        <div class="absolute inset-0 shadow-[inset_0_0_50px_rgba(59,130,246,0.05)] rounded-2xl"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto space-y-10 mt-16 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center glass-panel p-8 premium-text-anim">
+            <div>
+                <h1 class="text-4xl font-bold title-glow mb-3">Analysis Complete</h1>
+                <p class="text-slate-600 dark:text-slate-300 text-lg font-medium">Here is your customized ATS breakdown and feedback.</p>
+            </div>
+            <div class="flex flex-wrap gap-3 mt-8 md:mt-0 justify-end max-w-xl">
+                <!-- Secondary Edit Action (Placeholder logic for future extension) -->
+                <button type="button" aria-label="Edit Resume" title="Make changes to your resume now" class="px-5 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:shadow-md transition-all text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold focus:ring-4 focus:ring-emerald-500/20 text-sm flex items-center justify-center gap-2 min-h-[44px]">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    Edit Resume
+                </button>
+
+                <button type="button" id="downloadBtn" aria-label="Download Report" title="Get a PDF of your resume feedback" class="px-5 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-md transition-all text-blue-600 dark:text-blue-400 font-bold focus:ring-4 focus:ring-blue-500/20 text-sm flex items-center justify-center gap-2 min-h-[44px]">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span id="downloadBtnText">Download Report</span>
+                </button>
+
+                <!-- Primary Action -->
+                <a href="index.html" aria-label="Analyze New Resume" title="Return to start page to check a new document" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-105 transition-transform text-center flex items-center justify-center min-h-[44px] text-sm md:text-base">
+                    Analyze Another
+                </a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel p-10 flex flex-col items-center justify-center text-center fade-up-base" style="animation-delay: 0.1s;">
+                <div class="relative w-48 h-48">
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" class="text-slate-200 dark:text-slate-800" stroke-width="8" />
+                        <circle id="scoreCircle" cx="50" cy="50" r="45" fill="none" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="283" class="transition-all duration-1000 ease-out drop-shadow-md" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span id="scoreValue" class="text-6xl font-extrabold text-slate-800 dark:text-white tracking-tighter">0</span>
+                        <span class="text-base font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-widest">Score</span>
+                    </div>
+                </div>
+                <div class="mt-8 inline-block px-8 py-2.5 rounded-full text-sm font-bold tracking-widest uppercase border shadow-sm" id="atsVerdictLabel">
+                    VERDICT
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 md:col-span-2 fade-up-base" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl font-bold mb-8 text-slate-800 dark:text-slate-100 flex items-center gap-3">
+                    <span class="bg-blue-100 dark:bg-blue-900/50 p-2 rounded-lg text-blue-600 dark:text-blue-400">🔑</span> 
+                    Keyword Analysis
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div>
+                        <h3 class="text-sm font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-5 flex items-center gap-2"><span class="text-xl">✅</span> Matched</h3>
+                        <div id="matchedKeywords" class="flex flex-wrap gap-2.5"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-red-600 dark:text-red-400 uppercase tracking-widest mb-5 flex items-center gap-2"><span class="text-xl">❌</span> Missing</h3>
+                        <div id="missingKeywords" class="flex flex-wrap gap-2.5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-panel p-8 border-t-4 border-t-emerald-500 fade-up-base" style="animation-delay: 0.3s;">
+                <h2 class="text-xl font-bold mb-6 text-emerald-700 dark:text-emerald-400 flex items-center gap-2">💪 Strengths</h2>
+                <ul id="strengthsList" class="space-y-4 text-slate-700 dark:text-slate-300 font-medium"></ul>
+            </div>
+            <div class="glass-panel p-8 border-t-4 border-t-red-500 fade-up-base" style="animation-delay: 0.4s;">
+                <h2 class="text-xl font-bold mb-6 text-red-700 dark:text-red-400 flex items-center gap-2">🚩 Weaknesses</h2>
+                <ul id="weaknessesList" class="space-y-4 text-slate-700 dark:text-slate-300 font-medium"></ul>
+            </div>
+        </div>
+
+        <div class="glass-panel p-8 border-t-4 border-t-blue-500 fade-up-base" style="animation-delay: 0.5s;">
+            <h2 class="text-2xl font-bold mb-8 text-blue-700 dark:text-blue-400 flex items-center gap-2">💡 Actionable Suggestions</h2>
+            <ul id="suggestionsList" class="grid gap-5"></ul>
+        </div>
+
+        <div class="glass-panel p-10 border border-purple-200 dark:border-purple-500/30 bg-purple-50/50 dark:bg-purple-900/10 fade-up-base" style="animation-delay: 0.6s;">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="text-4xl">✨</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">AI Rewritten Bullets</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mt-1 font-medium text-sm lg:text-base">Upgrade your resume impact with these suggested replacements for weak lines:</p>
+                </div>
+            </div>
+            <div id="rewrittenBullets" class="grid gap-5"></div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rawData = localStorage.getItem('analysisResult');
+            if (!rawData) {
+                window.location.href = 'index.html';
+                return;
+            }
+            const data = JSON.parse(rawData);
+
+            const themeToggle = document.getElementById('themeToggle');
+            let vantaEffect = null;
+
+            function initVanta() {
+                const isDark = document.documentElement.classList.contains('dark');
+                if (vantaEffect) vantaEffect.destroy();
+                vantaEffect = VANTA.DOTS({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: isDark ? 0xa855f7 : 0x6366f1,
+                    color2: isDark ? 0x3b82f6 : 0x06b6d4,
+                    backgroundColor: isDark ? 0x050505 : 0xf8fafc,
+                    backgroundAlpha: 0.0, // Allow natural CSS linear gradients to shine through
+                    size: isDark ? 3.50 : 4.00,
+                    spacing: isDark ? 40.00 : 45.00
+                });
+            }
+            initVanta();
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                if (isDark) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+                initVanta();
+            });
+
+            const score = parseInt(data.score) || 0;
+            let scoreColorClass = 'text-red-500'; 
+            let verdictBaseClass = 'bg-red-100 text-red-700 border-red-300 dark:bg-red-900/30 dark:text-red-400 dark:border-red-500/50';
+
+            if (score >= 80) {
+                scoreColorClass = 'text-emerald-500';
+                verdictBaseClass = 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-500/50';
+            } else if (score >= 60) {
+                scoreColorClass = 'text-yellow-500';
+                verdictBaseClass = 'bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-500/50';
+            }
+
+            setTimeout(() => {
+                const circle = document.getElementById('scoreCircle');
+                const offset = 283 - (283 * score) / 100;
+                circle.style.strokeDashoffset = offset;
+                
+                // Color stroke using explicit color to avoid Tailwind stroke inheritance issues
+                let c = '#ef4444';
+                if(score >= 80) c = '#10b981';
+                else if(score >= 60) c = '#eab308';
+                circle.style.stroke = c;
+            }, 100);
+
+            let curr = 0;
+            const counter = document.getElementById('scoreValue');
+            const interval = setInterval(() => {
+                if (curr >= score) clearInterval(interval);
+                else {
+                    curr++;
+                    counter.innerText = curr;
+                }
+            }, 15);
+
+            const verdictEl = document.getElementById('atsVerdictLabel');
+            verdictEl.innerText = (data.ats_verdict || 'N/A').toUpperCase();
+            verdictEl.className += ` ${verdictBaseClass}`;
+
+            const addBadges = (containerId, items, badgeClass) => {
+                const container = document.getElementById(containerId);
+                (items || []).forEach(item => {
+                    const span = document.createElement('span');
+                    span.className = `px-4 py-1.5 rounded-full text-xs font-bold shadow-sm ${badgeClass}`;
+                    span.innerText = item;
+                    container.appendChild(span);
+                });
+                if(!items || items.length === 0) container.innerHTML = '<span class="text-slate-500 italic">None found</span>';
+            };
+            addBadges('matchedKeywords', data.matched_keywords, 'bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:border-emerald-700/50');
+            addBadges('missingKeywords', data.missing_keywords, 'bg-red-100 text-red-700 border border-red-200 dark:bg-red-900/40 dark:text-red-300 dark:border-red-700/50');
+
+            const addListItems = (containerId, items, iconClass) => {
+                const container = document.getElementById(containerId);
+                (items || []).forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start';
+                    li.innerHTML = `<span class="${iconClass}">•</span> <span class="leading-relaxed text-[1.05rem]">${item}</span>`;
+                    container.appendChild(li);
+                });
+            };
+            addListItems('strengthsList', data.strengths, 'text-emerald-500 font-bold mr-3 text-2xl leading-none');
+            addListItems('weaknessesList', data.weaknesses, 'text-red-500 font-bold mr-3 text-2xl leading-none');
+
+            const suggestionsList = document.getElementById('suggestionsList');
+            (data.suggestions || []).forEach((item, i) => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start gap-5 p-6 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 shadow-sm transition-all hover:shadow-md';
+                li.innerHTML = `<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 font-bold text-lg border border-blue-200 dark:border-blue-800">${i+1}</div>
+                                <p class="text-slate-700 dark:text-slate-300 mt-1.5 font-medium leading-relaxed text-[1.05rem]">${item}</p>`;
+                suggestionsList.appendChild(li);
+            });
+
+            const rwContainer = document.getElementById('rewrittenBullets');
+            (data.rewritten_bullets || []).forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm border-l-[6px] border-purple-500 text-slate-700 dark:text-slate-200 font-medium leading-relaxed transition-all hover:shadow-md hover:border-purple-600 text-[1.05rem] relative';
+                
+                const quoteIcon = document.createElement('span');
+                quoteIcon.innerHTML = '"';
+                quoteIcon.className = 'absolute top-2 left-4 text-purple-200 dark:text-purple-900/30 font-serif text-6xl pointer-events-none select-none';
+                
+                const p = document.createElement('p');
+                p.className = "relative z-10 pl-6";
+                p.innerText = item;
+                
+                div.appendChild(quoteIcon);
+                div.appendChild(p);
+
+                rwContainer.appendChild(div);
+            });
+            if (!data.rewritten_bullets || data.rewritten_bullets.length === 0) {
+                 rwContainer.innerHTML = '<p class="text-slate-500 italic font-medium p-4">No rewriting needed or AI did not return any.</p>';
+            }
+
+            document.getElementById('downloadBtn').addEventListener('click', async () => {
+                const btnContent = document.getElementById('downloadBtnText');
+                const originalText = btnContent.innerText;
+                btnContent.innerText = 'Generating...';
+                try {
+                    const response = await fetch('http://localhost:8000/download-report', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if (!response.ok) throw new Error("Failed to generate PDF");
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Resume_Analysis_Report.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                } catch(err) {
+                    alert(err.message);
+                } finally {
+                    btnContent.innerText = originalText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

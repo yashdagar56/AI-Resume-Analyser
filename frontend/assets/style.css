@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+    /* ----- SUPER PREMIUM LIGHT THEME (Structured & High Contrast) ----- */
+    --bg-gradient: linear-gradient(135deg, #f5f7fb 0%, #eef2ff 100%);
+    --text-color: #334155; /* sophisticated soft slate-gray */
+    
+    /* Structured light-dark panels for balance */
+    --panel-bg: rgba(255, 255, 255, 0.85); 
+    --panel-border: rgba(15, 23, 42, 0.15); /* Stronger grey/slate border */
+    --panel-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05); /* Sleek darker shadow */
+    
+    --title-gradient: linear-gradient(135deg, #1e3a8a 0%, #4338ca 50%, #6d28d9 100%); /* Deeper bold colors */
+    --gradient-start: #1e3a8a;
+    --gradient-mid: #4338ca;
+    --gradient-end: #6d28d9;
+    --stroke-color: #4338ca;
+    --title-glow: drop-shadow(0 0 20px rgba(67, 56, 202, 0.2));
+    
+    --drop-bg: rgba(241, 245, 249, 0.8);
+    --input-bg: rgba(255, 255, 255, 0.95);
+    --input-border: rgba(15, 23, 42, 0.25); /* More visible dark borders for inputs */
+    --input-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+/* Ensure the main tech frame border in Light mode is visibly dark and structured */
+#techFrame { border-color: rgba(15, 23, 42, 0.4) !important; }
+.dark #techFrame { border-color: rgba(96, 165, 250, 0.3) !important; }
+
+/* Darken the accent corners for Light Theme */
+#techFrame > div:not(.absolute.inset-0) {
+    border-color: rgba(15, 23, 42, 0.8) !important;
+}
+.dark #techFrame > div:nth-child(1), .dark #techFrame > div:nth-child(4) { 
+    border-color: rgba(59, 130, 246, 0.8) !important; 
+}
+.dark #techFrame > div:nth-child(2), .dark #techFrame > div:nth-child(3) { 
+    border-color: rgba(168, 85, 247, 0.8) !important; 
+}
+
+.dark {
+    /* ----- PREMIUM DARK THEME ----- */
+    --bg-gradient: linear-gradient(135deg, #050505 0%, #0f172a 100%);
+    --text-color: #ffffff; /* pure white to maximize contrast */
+    
+    --panel-bg: rgba(9, 14, 23, 0.85); /* Significantly darker, more opaque to block neon lines */
+    --panel-border: rgba(255, 255, 255, 0.15); /* More visible framing */
+    --panel-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    
+    --title-gradient: linear-gradient(135deg, #e0e7ff 0%, #38bdf8 50%, #818cf8 100%);
+    --gradient-start: #e0e7ff;
+    --gradient-mid: #38bdf8;
+    --gradient-end: #818cf8;
+    --stroke-color: #38bdf8;
+    --title-glow: drop-shadow(0 0 20px rgba(56, 189, 248, 0.5));
+    
+    --drop-bg: rgba(15, 23, 42, 0.4);
+    --input-bg: #09090b;
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-shadow: inset 0 4px 6px -1px rgba(0,0,0,0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.5px;
+}
+p, span, label, li { transition: color 0.3s; }
+p { color: #6b7280; }
+.dark p, .dark label, .dark li { 
+    color: #e2e8f0 !important; /* Force high-contrast gray/white */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8); /* Lift text off the panel */
+}
+
+/* Fix text gradient clipping so gradients are ALWAYS visible */
+.title-glow {
+    background: var(--title-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: var(--title-glow);
+}
+
+.glass-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--panel-shadow);
+    border-radius: 16px;
+    transition: all 0.4s ease;
+}
+
+/* Gradient Border for Drop Zone */
+.gradient-border-box {
+    position: relative;
+    border-radius: 12px;
+    background: var(--drop-bg);
+    background-clip: padding-box;
+    border: solid 2px transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.gradient-border-box::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3b82f6, #a855f7);
+    opacity: 0.25;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
+.dark .gradient-border-box::before { 
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    opacity: 0.6; 
+}
+.gradient-border-box:hover::before {
+    opacity: 0.8;
+}
+.dark .gradient-border-box:hover::before {
+    opacity: 1;
+}
+.gradient-border-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 2px rgba(99,102,241,0.2), 0 10px 30px rgba(99,102,241,0.2);
+    border-color: #6366f1;
+}
+.dark .gradient-border-box:hover {
+    box-shadow: 0 0 0 2px rgba(56,189,248,0.3), 0 10px 30px rgba(56,189,248,0.2);
+    border-color: #38bdf8;
+}
+.gradient-border-box.dragging {
+    background: rgba(99, 102, 241, 0.08);
+    border: 2px dashed #6366f1;
+    transform: scale(1.02);
+}
+.dark .gradient-border-box.dragging {
+    background: rgba(56, 189, 248, 0.1);
+    border: 2px dashed #38bdf8;
+}
+.gradient-border-box:hover svg {
+    color: #4f46e5 !important;
+}
+.dark .gradient-border-box:hover svg {
+    color: #22d3ee !important;
+    filter: drop-shadow(0 0 8px #22d3ee);
+}
+
+/* Inputs */
+textarea {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    box-shadow: var(--input-shadow);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+textarea:focus {
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+    border-color: #2563eb !important;
+    outline: none;
+}
+.dark textarea {
+    color: #ffffff; /* Brighten input text */
+}
+.dark textarea:focus {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    border-color: #38bdf8 !important;
+}
+
+/* Glow Button */
+.glow-button {
+    background: linear-gradient(135deg, #2563eb, #6366f1);
+    font-weight: 700;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+.dark .glow-button {
+    background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+}
+.glow-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
+}
+.dark .glow-button:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 1);
+}
+
+/* Floating animation */
+.floating { animation: float 6s ease-in-out infinite; }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Floating Side Action Buttons */
+.side-action-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 26px; /* Perfect Circle natively, expands into Capsule */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align icon against the right edge */
+    padding-right: 13px; /* Centers the 24px icon horizontally inside the 52px block */
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    box-shadow: var(--panel-shadow);
+    color: var(--text-color);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 50;
+    overflow: hidden; /* Hides the label entirely when collapsed */
+    transform-origin: right center; /* Locks the right edge in place */
+}
+.side-action-btn:hover { 
+    width: 140px; /* Capsule horizontal expand */
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border-color: transparent;
+    color: white !important;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4), 0 0 15px rgba(99, 102, 241, 0.6);
+}
+.dark .side-action-btn:hover { 
+    background: linear-gradient(135deg, #0ea5e9, #3b82f6); /* Explicit deep blue gradient in dark mode */
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4), 0 0 15px rgba(59, 130, 246, 0.6); 
+    color: #ffffff !important;
+}
+
+/* Explicit Interactive Menu Labels */
+.side-action-label {
+    opacity: 0;
+    white-space: nowrap;
+    margin-right: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+}
+.side-action-btn:hover .side-action-label {
+    opacity: 1;
+    transition-delay: 0.15s;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 4px; }
+
+/* Splash Screen Animations & Premium Text Revaels */
+.premium-text-anim-wide {
+    animation: premiumTextRevealWide 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+.premium-text-anim {
+    animation: premiumTextReveal 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+
+@keyframes premiumTextReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        letter-spacing: 0.25em;
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: normal;
+        filter: blur(0px);
+    }
+}
+
+@keyframes premiumTextRevealWide {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        letter-spacing: 0.45em;
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0.1em; /* normal wide spacing */
+        filter: blur(0px);
+    }
+}
+
+.fade-in-delayed {
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.2s both; 
+}
+@keyframes fade-in {
+    0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.splash-exit {
+    opacity: 0;
+    transform: scale(1.1);
+    pointer-events: none;
+}
+
+.app-enter {
+    animation: app-appear 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+@keyframes app-appear {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.fade-up-base {
+    animation: fadeUp 0.6s ease cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* File Success Card UI */
+.file-success-card {
+    animation: successPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    position: relative;
+}
+.dark .file-success-card {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+@keyframes successPop {
+    0% { transform: scale(0.9) translateY(10px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.file-size-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+}
+.dark .file-size-badge {
+    background: rgba(96, 165, 250, 0.2);
+    color: #93c5fd;
+}
+
+#clearFileBtn {
+    transition: all 0.3s ease;
+}
+#clearFileBtn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444 !important;
+    transform: scale(1.05);
+}
