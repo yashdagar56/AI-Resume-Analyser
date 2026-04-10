@@ -1,59 +1,61 @@
-# AI Resume Analyzer
+# AI Resume Analyser 🚀
 
-A full-stack application that analyzes resumes against job descriptions using Google's Gemini 1.5 Flash AI, providing detailed ATS scoring and feedback.
+I built this **AI Resume Analyser** to bridge the gap between job seekers and Applicant Tracking Systems (ATS). It's a full-stack solution that evaluates resumes against specific job descriptions using Google's Gemini 1.5 Flash AI, providing the kind of feedback normally reserved for professional recruiters.
 
-![Demo](assets/demo.png)
+## Why I Built This
+Applying for jobs can feel like shouting into a void. I wanted to create a tool that gives instant, actionable feedback—not just a score, but actual AI-rewritten bullet points and keyword analysis to help people actually get interviews.
 
-## Tech Stack
-- Frontend: HTML5, Tailwind CSS, Vanilla JS
-- Backend: FastAPI, PyMuPDF, ReportLab
-- AI: Google Gemini 1.5 Flash
+## The Tech Stack
+- **Frontend**: Crafted with clean HTML5 and Vanilla JavaScript, leveraging Tailwind CSS for a premium, responsive look.
+- **Backend**: Powering the logic is FastAPI, which handles the file uploads and communication with the AI.
+- **AI Intelligence**: I integrated Google Gemini 1.5 Flash to provide fast and accurate ATS breakdowns.
+- **Report Generation**: I used ReportLab to generate custom, branded PDF reports that users can download.
 
-## Features
-- Drag & Drop PDF resume upload.
-- Full ATS evaluation with score, keyword matching, and verdict.
-- Automatically rewrite weak bullet points using AI.
-- Download a beautifully formatted PDF report of the findings.
+## Features I've Implemented
+- **Premium Upload Experience**: A custom drag-and-drop interface that locks once a file is uploaded to prevent errors.
+- **Real-time ATS Scoring**: Instant calculation of how well a resume matches a job description.
+- **Keyword Analysis**: Visual breakdown of matched and missing keywords.
+- **AI Bullet Point Rewriting**: The AI suggests better ways to phrase weak parts of a resume.
+- **Branded PDF Downloads**: Detailed reports generated on the fly.
 
-## Setup Instructions
+## How to Run My Project
 
-1. **Install dependencies:**
+1. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Environment Variables:**
-   Add your Gemini API Key directly to the `.env` file at the root of the project:
+2. **API Configuration**:
+   The project uses a `.env` file for the Gemini API Key. I've structured it like this:
    ```env
    GEMINI_API_KEY=your_google_gemini_api_key
    ```
 
-3. **Run the backend server:**
+3. **Start the Backend**:
    ```bash
    uvicorn backend.main:app --reload
    ```
 
-4. **Open the frontend:**
-   Open `frontend/index.html` in your favorite web browser.
+4. **Launch the Frontend**:
+   Simply open `frontend/index.html` in any browser to experience the app.
 
-## Folder Structure
+## Project Structure
 ```
 ai-resume-analyzer/
 ├── backend/
-│   ├── main.py              # FastAPI app, all routes
-│   ├── parser.py            # PDF text extraction
-│   ├── analyzer.py          # Gemini API logic + prompt
-│   ├── report.py            # PDF report generator
-│   └── requirements.txt
+│   ├── main.py              # Application routes & middleware
+│   ├── parser.py            # Logic for PDF text extraction
+│   ├── analyzer.py          # Gemini AI prompt engineering
+│   ├── report.py            # PDF generation logic
 ├── frontend/
-│   ├── index.html           # Upload page
-│   ├── result.html          # Results page
+│   ├── index.html           # Main experience & upload UI
+│   ├── result.html          # Dynamic analysis results
 │   └── assets/
-│       └── style.css        # Custom styles
-├── .env                     # Contains GEMINI_API_KEY
-├── .gitignore               
-└── README.md
+│       └── style.css        # Custom premium styling & animations
+├── .env                     # API Credentials
+├── .gitignore               # Keeps the repo clean
+└── README.md                # That's what you're reading!
 ```
 
-## Live Demo
-[Link placeholder]
+---
+*Created with passion by Yash Dagar*
