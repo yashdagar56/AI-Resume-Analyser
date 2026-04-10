@@ -8,8 +8,8 @@
 
 const API_CONFIG = {
     // 1. CHANGE THIS to your actual Railway/Render/Production URL once you have it!
-    // Example: "https://ai-resume-analyser-production.up.railway.app"
-    productionUrl: "https://your-production-url-here.up.railway.app",
+    // Example: "https://backendyash-ai-resume-backend.hf.space"
+    productionUrl: "https://backendyash-ai-resume-backend.hf.space",
     
     localUrl: "http://localhost:8000",
     
