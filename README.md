@@ -56,4 +56,4 @@ ai-resume-analyzer/
 ```
 
 ## Live Demo
-file:///C:/Users/A/Desktop/New%20folder/PROJECT%202/AI%20RESUME/ai-resume-analyzer/frontend/index.html
+[file:///C:/Users/A/Desktop/New%20folder/PROJECT%202/AI%20RESUME/ai-resume-analyzer/frontend/index.html]
