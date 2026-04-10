@@ -11,6 +11,7 @@
         else { document.documentElement.classList.add('dark'); localStorage.theme = 'dark'; }
     </script>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/api-config.js"></script>
 </head>
 <body class="min-h-screen font-sans flex flex-col items-center p-6 bg-transparent relative transition-colors duration-300">
     <div id="vanta-bg" class="fixed inset-0 z-[-1]"></div>
@@ -296,7 +297,7 @@
             formData.append('job_description', document.getElementById('job_description').value);
 
             try {
-                const response = await fetch('http://localhost:8000/analyze', {
+                const response = await fetch(`${API_CONFIG.baseUrl}/analyze`, {
                     method: 'POST',
                     body: formData
                 });

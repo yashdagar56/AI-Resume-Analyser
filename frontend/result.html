@@ -11,6 +11,7 @@
         else { document.documentElement.classList.add('dark'); localStorage.theme = 'dark'; }
     </script>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/api-config.js"></script>
 </head>
 <body class="min-h-screen font-sans p-6 pb-20 bg-transparent relative transition-colors duration-300">
     <div id="vanta-bg" class="fixed inset-0 z-[-1]"></div>
@@ -287,7 +288,7 @@
                 const originalText = btnContent.innerText;
                 btnContent.innerText = 'Generating...';
                 try {
-                    const response = await fetch('http://localhost:8000/download-report', {
+                    const response = await fetch(`${API_CONFIG.baseUrl}/download-report`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
