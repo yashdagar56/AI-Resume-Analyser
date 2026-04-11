@@ -9,7 +9,9 @@ pinned: false
 
 # AI Resume Analyser 🚀
 
-I built this **AI Resume Analyser** to bridge the gap between job seekers and Applicant Tracking Systems (ATS). It's a full-stack solution that evaluates resumes against specific job descriptions using Google's Gemini 1.5 Flash AI, providing the kind of feedback normally reserved for professional recruiters.
+👉 **[Try the Live Web Demo Here!](https://ai-resume-frontend.pages.dev/)** 👈
+
+I built this **AI Resume Analyser** to bridge the gap between job seekers and Applicant Tracking Systems (ATS). It's a full-stack solution that evaluates resumes against specific job descriptions using Google's Gemini AI, providing the kind of feedback normally reserved for professional recruiters.
 
 ## Why I Built This
 Applying for jobs can feel like shouting into a void. I wanted to create a tool that gives instant, actionable feedback—not just a score, but actual AI-rewritten bullet points and keyword analysis to help people actually get interviews.
