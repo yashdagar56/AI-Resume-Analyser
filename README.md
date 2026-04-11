@@ -1,3 +1,12 @@
+---
+title: AI Resume Backend
+emoji: 🚀
+colorFrom: blue
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # AI Resume Analyser 🚀
 
 I built this **AI Resume Analyser** to bridge the gap between job seekers and Applicant Tracking Systems (ATS). It's a full-stack solution that evaluates resumes against specific job descriptions using Google's Gemini 1.5 Flash AI, providing the kind of feedback normally reserved for professional recruiters.
