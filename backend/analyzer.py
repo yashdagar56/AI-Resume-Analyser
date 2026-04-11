@@ -44,7 +44,16 @@ Analyze the resume against the job description and return ONLY a valid JSON obje
 """
     
     try:
-        response = model.generate_content(prompt)
+        model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        try:
+            response = model.generate_content(prompt)
+        except Exception as first_e:
+            # Fallback to older, universally supported model if 1.5-flash is not available for this key
+            fallback_model = genai.GenerativeModel('gemini-pro')
+            try:
+                response = fallback_model.generate_content(prompt)
+            except Exception as second_e:
+                raise Exception(f"Both models failed. Primary error: {str(first_e)}")
         
         # Safely parse JSON response
         response_text = response.text.strip()
