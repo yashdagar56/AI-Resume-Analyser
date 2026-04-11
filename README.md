@@ -56,4 +56,5 @@ ai-resume-analyzer/
 ```
 
 ## Live Demo
-[C:/Users/A/Desktop/New%20folder/PROJECT%202/AI%20RESUME/ai-resume-analyzer/frontend/index.html](https://ai-resume-analyser.ydagar787.workers.dev/)
+[[C:/Users/A/Desktop/New%20folder/PROJECT%202/AI%20RESUME/ai-resume-analyzer/frontend/index.html](https://ai-resume-analyser.ydagar787.workers.dev/)
+](https://ai-resume-frontend.pages.dev/)
