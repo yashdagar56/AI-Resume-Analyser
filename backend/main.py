@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+import google.generativeai as genai
 from fastapi.responses import FileResponse
 import os
 
@@ -21,6 +22,14 @@ app.add_middleware(
 @app.get("/")
 def health_check():
     return {"status": "running"}
+
+@app.get("/debug-models")
+def list_available_models():
+    try:
+        models = [m.name for m in genai.list_models()]
+        return {"models": models}
+    except Exception as e:
+        return {"error": str(e)}
 
 @app.post("/analyze")
 async def analyze_endpoint(
