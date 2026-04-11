@@ -44,16 +44,22 @@ Analyze the resume against the job description and return ONLY a valid JSON obje
 """
     
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        # Dynamically find the best supported model for this specific API key
+        valid_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        preferred = ['models/gemini-2.5-flash', 'models/gemini-2.0-flash', 'models/gemini-1.5-flash-latest', 'models/gemini-flash-latest']
+        
+        chosen_model = valid_models[0] if valid_models else 'gemini-pro'
+        for pref in preferred:
+            if pref in valid_models:
+                chosen_model = pref
+                break
+
+        model = genai.GenerativeModel(chosen_model)
+        
         try:
             response = model.generate_content(prompt)
-        except Exception as first_e:
-            # Fallback to older, universally supported model if 1.5-flash is not available for this key
-            fallback_model = genai.GenerativeModel('gemini-pro')
-            try:
-                response = fallback_model.generate_content(prompt)
-            except Exception as second_e:
-                raise Exception(f"Both models failed. Primary error: {str(first_e)}")
+        except Exception as api_e:
+            raise Exception(f"Failed to generate content with {chosen_model}. API Error: {str(api_e)}")
         
         # Safely parse JSON response
         response_text = response.text.strip()
