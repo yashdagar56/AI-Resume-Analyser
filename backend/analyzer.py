@@ -19,7 +19,7 @@ def analyze_resume(resume_text: str, job_description: str) -> dict:
             "error": "Gemini API key is missing or invalid. Please setup .env correctly."
         }
 
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
     
     prompt = f"""You are an expert ATS resume screener and career coach.
 
