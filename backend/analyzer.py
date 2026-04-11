@@ -43,27 +43,32 @@ Analyze the resume against the job description and return ONLY a valid JSON obje
 }}
 """
     
-    response = model.generate_content(prompt)
-    
-    # Safely parse JSON response
-    response_text = response.text.strip()
-    
-    if response_text.startswith("```json"):
-        response_text = response_text.replace("```json", "", 1)
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
-    elif response_text.startswith("```"):
-        response_text = response_text.replace("```", "", 1)
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
-
-    response_text = response_text.strip()
-    
     try:
-        data = json.loads(response_text)
-        return data
-    except json.JSONDecodeError:
+        response = model.generate_content(prompt)
+        
+        # Safely parse JSON response
+        response_text = response.text.strip()
+        
+        if response_text.startswith("```json"):
+            response_text = response_text.replace("```json", "", 1)
+            if response_text.endswith("```"):
+                response_text = response_text[:-3]
+        elif response_text.startswith("```"):
+            response_text = response_text.replace("```", "", 1)
+            if response_text.endswith("```"):
+                response_text = response_text[:-3]
+
+        response_text = response_text.strip()
+        
+        try:
+            data = json.loads(response_text)
+            return data
+        except json.JSONDecodeError:
+            return {
+                "error": "Failed to parse JSON",
+                "raw_response": response_text
+            }
+    except Exception as e:
         return {
-            "error": "Failed to parse JSON",
-            "raw_response": response_text
+            "error": f"AI Analysis failed: {str(e)}"
         }

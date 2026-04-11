@@ -31,7 +31,10 @@ async def analyze_endpoint(
     file_bytes = await resume.read()
     
     # Parse PDF text
-    resume_text = extract_text_from_pdf(file_bytes)
+    try:
+        resume_text = extract_text_from_pdf(file_bytes)
+    except Exception as e:
+        return {"error": f"Failed to read PDF file: {str(e)}"}
     
     # Analyze using Gemini
     result_json = analyze_resume(resume_text, job_description)
